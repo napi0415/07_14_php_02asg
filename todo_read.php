@@ -35,9 +35,9 @@ if ($status == false) {
         $output .= "<td>{$record["player_position"]}</td>";
         $output .= "<td>{$record["uni_number"]}</td>";
         $output .= "<td>{$record["height"]}</td>";
-        $output .= "<td>{$record["weight"]}</td>";
+        $output .= "<td>{$record["p_weight"]}</td>";
         $output .= "<td>{$record["league"]}</td>";
-        $output .= "<td>{$record["teame"]}</td>";
+        $output .= "<td>{$record["team"]}</td>";
         $output .= "<td>{$record["area"]}</td>";
         $output .= "<td>{$record["throws"]}</td>";
         $output .= "<td>{$record["bats"]}</td>";
@@ -50,6 +50,7 @@ if ($status == false) {
         $output .= "<td>{$record["second_throw_1"]}</td>";
         $output .= "<td>{$record["second_throw_2"]}</td>";
         $output .= "<td>{$record["second_throw_3"]}</td>";
+        $output .= "<td>{$record["note"]}</td>";
         $output .= "</tr>";
     }
 }
@@ -92,6 +93,7 @@ if ($status == false) {
                     <th>セカンドスロー 1</th>
                     <th>セカンドスロー 2</th>
                     <th>セカンドスロー 3</th>
+                    <th>備考</th>
                 </tr>
             </thead>
             <tbody>

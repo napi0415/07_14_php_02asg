@@ -1,16 +1,43 @@
+<?php
+// var_dump($_GET);
+// exit();
+
+include("functions.php");
+$id = $_GET['id'];
+// DB接続&id名でテーブルから検索
+$pdo = connect_to_db();
+$sql = 'SELECT * FROM wbc2018_u15_table WHERE id=:id';
+$stmt = $pdo->prepare($sql);
+$stmt->bindValue(':id', $id, PDO::PARAM_STR);
+$status = $stmt->execute();
+
+// fetch()で1レコード取得できる. 
+if ($status == false) {
+    $error = $stmt->errorInfo();
+    echo json_encode(["error_msg" => "{$error[2]}"]);
+    exit();
+} else {
+    $record = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // var_dump($record);
+    // exit();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WBSC U-15日本代表トライアウト（入力画面）</title>
+    <title>WBSC U-15日本代表トライアウト（編集画面）</title>
 </head>
 
 <body>
-    <form action="todo_create.php" method="POST">
+    <form action="todo_update.php" method="POST">
         <fieldset>
-            <legend>WBSC U-15日本代表トライアウト（入力画面）</legend>
+            <legend>WBSC U-15日本代表トライアウト（編集画面）</legend>
             <a href="todo_read.php">一覧画面</a>
             <div>
                 名前: <input type="text" name="player_name">
@@ -79,9 +106,12 @@
             </div>
             <div>
                 <button>submit</button>
+                <input name="id" value="<?= $record['id'] ?>">
             </div>
+
         </fieldset>
     </form>
+
 </body>
 
 </html>
